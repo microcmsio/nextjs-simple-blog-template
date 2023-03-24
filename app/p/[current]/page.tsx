@@ -6,9 +6,17 @@ import { LIMIT } from '@/constants';
 import Pagination from '@/components/Pagination';
 import styles from './page.module.css';
 
-export default async function Page() {
+type Props = {
+  params: {
+    current: string;
+  };
+};
+
+export default async function Page({ params }: Props) {
+  const current = parseInt(params.current as string, 10);
   const data = await getList({
     limit: LIMIT,
+    offset: LIMIT * (current - 1),
   });
   return (
     <div>
@@ -52,7 +60,7 @@ export default async function Page() {
           </li>
         ))}
       </ul>
-      <Pagination totalCount={data.totalCount} />
+      <Pagination totalCount={data.totalCount} current={current} />
     </div>
   );
 }
