@@ -1,0 +1,27 @@
+.main {
+  width: 720px;
+  margin: 0 auto;
+}
+
+.header {
+  padding: 16px 24px;
+}
+
+.logo {
+  height: 24px;
+  width: auto;
+}
+
+.footer {
+  padding: 16px 24px;
+  text-align: center;
+  color: var(--color-text-sub);
+  font-size: var(--font-size-small);
+}
+
+@media (max-width: 640px) {
+  .main {
+    width: auto;
+    padding: 24px;
+  }
+}
