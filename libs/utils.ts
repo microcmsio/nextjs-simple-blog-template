@@ -16,6 +16,5 @@ export const formatRichText = (richText: string) => {
     const res = hljs.highlightAuto($(elm).text());
     $(elm).html(res.value);
   });
-  console.log($.html());
   return $.html();
 };
