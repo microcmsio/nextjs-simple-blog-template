@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation';
 import { getDetail } from '@/libs/microcms';
 import Article from '@/components/Article';
 
@@ -13,7 +14,7 @@ export const revalidate = 0;
 
 export default async function Page({ searchParams }: Props) {
   if (!searchParams.slug || !searchParams.draftKey) {
-    return null;
+    notFound();
   }
   const data = await getDetail(searchParams.slug, {
     draftKey: searchParams.draftKey,

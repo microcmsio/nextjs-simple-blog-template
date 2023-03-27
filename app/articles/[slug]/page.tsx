@@ -9,6 +9,5 @@ type Props = {
 
 export default async function Page({ params }: Props) {
   const data = await getDetail(params.slug);
-
   return <Article data={data} />;
 }
