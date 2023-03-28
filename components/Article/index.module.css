@@ -193,7 +193,7 @@
   .description {
     font-size: 0.9rem;
     color: var(--color-text-sub);
-    margin-bottom: 40px;
+    margin: 24px 0 40px;
     text-align: center;
   }
 
