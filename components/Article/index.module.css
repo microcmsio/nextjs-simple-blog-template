@@ -6,13 +6,13 @@
 }
 
 .title {
-  font-size: 2.4em;
+  font-size: 2.4rem;
   margin-bottom: 24px;
   text-align: center;
 }
 
 .description {
-  font-size: 0.9em;
+  font-size: 0.9rem;
   color: var(--color-text-sub);
   margin-bottom: 40px;
   text-align: center;
@@ -59,38 +59,38 @@
 }
 
 .content > h1 {
-  font-size: 2em;
+  font-size: 2rem;
   font-weight: bold;
   border-bottom: 1px solid var(--color-border);
-  margin: 2.4em 0 1em;
+  margin: 2.8rem 0 1rem;
 }
 
 .content > h2 {
-  font-size: 1.6em;
+  font-size: 1.6rem;
   font-weight: bold;
-  margin: 2.4em 0 1em;
+  margin: 2.8em 0 1rem;
 }
 
 .content > h3 {
-  font-size: 1.4em;
+  font-size: 1.4rem;
   font-weight: bold;
-  margin: 2.4em 0 1em;
+  margin: 2.8rem 0 1rem;
 }
 
 .content > h4 {
-  font-size: 1.2em;
+  font-size: 1.2rem;
   font-weight: bold;
-  margin: 2.4em 0 1em;
+  margin: 2.8rem 0 1rem;
 }
 
 .content > h5 {
-  font-size: 1.1em;
+  font-size: 1.1rem;
   font-weight: bold;
-  margin: 2.4em 0 1em;
+  margin: 2.8rem 0 1rem;
 }
 
 .content > p {
-  margin: 2em 0 0.5em;
+  margin: 2rem 0 0.5rem;
   line-height: 2;
 }
 
@@ -102,7 +102,7 @@
   background-color: var(--color-bg-code);
   display: block;
   overflow-x: auto;
-  padding: 1em;
+  padding: 16px;
 }
 
 .content div[data-filename]::before {
@@ -111,20 +111,20 @@
   content: attr(data-filename);
   margin: 1em 0 0;
   font-family: menlo, inconsolata, monospace;
-  font-size: var(--font-size-xSmall);
+  font-size: 0.8rem;
   padding: 4px 16px;
   border-radius: var(--border-radius) var(--border-radius) 0 0;
 }
 
 .content ul,
 .content ol {
-  margin: 0.5em 0 0.5em 2em;
+  margin: 0.5rem 0 0.5rem 2rem;
 }
 
 .content > ul,
 .content > ol {
-  margin-top: 2em;
-  margin-bottom: 2em;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .content ul > li {
@@ -136,7 +136,7 @@
 }
 
 .content li {
-  margin: 0.5em 0;
+  margin: 0.5rem 0;
 }
 
 .content a {
@@ -146,7 +146,7 @@
 .content > figure > img {
   max-width: 100%;
   height: auto;
-  margin: 2em 0;
+  margin: 2rem 0;
 }
 
 .content > strong {
@@ -155,13 +155,13 @@
 
 .content > blockquote {
   border-left: 4px solid var(--color-border);
-  padding-left: 1em;
+  padding-left: 1rem;
   font-style: italic;
-  margin: 2em 0;
+  margin: 2rem 0;
 }
 
 .content > hr {
-  margin: 4em 0;
+  margin: 4rem 0;
   height: 1px;
   background-color: var(--color-border);
   border: none;
@@ -169,29 +169,29 @@
 
 .content > table {
   width: 100%;
-  margin: 2em 0;
+  margin: 2rem 0;
 }
 
 .content > table th {
   background-color: var(--color-bg-sub);
   text-align: left;
-  padding: 1em;
+  padding: 1rem;
 }
 
 .content > table td {
   text-align: left;
-  padding: 1em;
+  padding: 1rem;
 }
 
 @media (max-width: 640px) {
   .title {
-    font-size: 2em;
+    font-size: 2rem;
     margin-bottom: 20px;
     text-align: center;
   }
 
   .description {
-    font-size: 0.9em;
+    font-size: 0.9rem;
     color: var(--color-text-sub);
     margin-bottom: 40px;
     text-align: center;
@@ -201,7 +201,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 40px;
-    font-size: var(--font-size-small);
+    font-size: 0.9rem;
   }
 
   .writer {

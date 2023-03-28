@@ -13,9 +13,9 @@
 }
 
 .title {
-  font-size: 1.6em;
+  font-size: 1.6rem;
   font-weight: bold;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.5rem;
 }
 
 @media (max-width: 640px) {
@@ -25,10 +25,10 @@
   .image {
     width: 100%;
     height: auto;
-    margin-bottom: 1em;
+    margin-bottom: 1rem;
   }
 
   .title {
-    font-size: 1.4em;
+    font-size: 1.4rem;
   }
 }

@@ -1,18 +1,18 @@
 .container {
   display: flex;
-  height: 50vh;
+  height: 75vh;
   align-items: center;
   justify-content: center;
 }
 
 .title {
-  font-size: var(--font-size-xLarge);
+  font-size: 1.5rem;
   text-align: center;
   font-weight: bold;
   font-family: 'system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif';
 }
 
 .text {
-  font-size: var(--font-size-small);
+  font-size: 0.8rem;
   text-align: center;
 }
