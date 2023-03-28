@@ -1,0 +1,6 @@
+.link {
+  background-color: var(--color-bg-sub);
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  border-radius: var(--border-radius);
+}

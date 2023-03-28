@@ -3,12 +3,13 @@ import Image from 'next/image';
 import { formatDate } from '@/libs/utils';
 import { Article } from '@/libs/microcms';
 import styles from './index.module.css';
+import Tags from '../Tags';
 
 type Props = {
   article: Article;
 };
 
-export default function Pagination({ article }: Props) {
+export default function ListItem({ article }: Props) {
   return (
     <li className={styles.list}>
       <Link href={`/articles/${article.id}`} className={styles.link}>
@@ -42,6 +43,9 @@ export default function Pagination({ article }: Props) {
         )}
         <dl className={styles.content}>
           <dt className={styles.title}>{article.title}</dt>
+          <dd>
+            <Tags tags={article.tags} hasLink={false} />
+          </dd>
           <dd>{formatDate(article.publishedAt || article.createdAt)}</dd>
         </dl>
       </Link>
