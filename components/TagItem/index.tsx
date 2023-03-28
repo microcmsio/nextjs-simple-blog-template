@@ -8,15 +8,12 @@ type Props = {
 };
 
 export default function TagItem({ tag, hasLink = true }: Props) {
-  return (
-    <li className={styles.list}>
-      {hasLink ? (
-        <Link href={`/tags/${tag.id}`} className={styles.link}>
-          #{tag.name}
-        </Link>
-      ) : (
-        <span className={styles.link}>#{tag.name}</span>
-      )}
-    </li>
-  );
+  if (hasLink) {
+    return (
+      <Link href={`/tags/${tag.id}`} className={styles.link}>
+        #{tag.name}
+      </Link>
+    );
+  }
+  return <span className={styles.link}>#{tag.name}</span>;
 }
