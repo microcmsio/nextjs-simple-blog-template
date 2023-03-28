@@ -95,19 +95,25 @@
 }
 
 .content > pre {
-  background-color: #f9f9f9;
-  box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.05);
-  padding: 0.5em;
-  border-radius: 2px;
   overflow-x: auto;
 }
 
 .content pre > code {
+  background-color: var(--color-bg-code);
   display: block;
   overflow-x: auto;
-  background-color: var(--color-bg-sub);
   padding: 1em;
-  border-radius: var(--border-radius);
+}
+
+.content div[data-filename]::before {
+  display: inline-block;
+  background-color: var(--color-bg-sub);
+  content: attr(data-filename);
+  margin: 1em 0 0;
+  font-family: menlo, inconsolata, monospace;
+  font-size: var(--font-size-xSmall);
+  padding: 4px 16px;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
 }
 
 .content ul,

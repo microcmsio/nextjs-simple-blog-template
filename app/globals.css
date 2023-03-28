@@ -5,8 +5,10 @@
   --color-text-main: #333;
   --color-text-sub: #999;
   --color-bg-main: #fff;
-  --color-bg-sub: #f7f7f7;
+  --color-bg-sub: #f3f3f3;
+  --color-bg-code: #fafafa;
   --color-border: #ccc;
+  --color-border-light: #ddd;
   --color-current: #eee;
   --font-size-xxxLarge: 32px;
   --font-size-xxLarge: 28px;
