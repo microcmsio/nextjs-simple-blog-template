@@ -29,7 +29,7 @@ npm install
 npm run dev
 ```
 
-3. 開発環境へのアクセス
+3. 開発環境へのアクセス  
    [http://localhost:3000](http://localhost:3000)にアクセス
 
 ## Vercel へのデプロイ
