@@ -7,7 +7,7 @@ type Props = {
   hasLink?: boolean;
 };
 
-export default function TagItem({ tag, hasLink = true }: Props) {
+export default function TagListItem({ tag, hasLink = true }: Props) {
   if (hasLink) {
     return (
       <Link href={`/tags/${tag.id}`} className={styles.link}>

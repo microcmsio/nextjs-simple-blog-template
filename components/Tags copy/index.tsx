@@ -1,5 +1,5 @@
 import { Tag } from '@/libs/microcms';
-import TagItem from '../TagItem';
+import TagListItem from '../TagListItem';
 import styles from './index.module.css';
 
 type Props = {
@@ -15,7 +15,7 @@ export default function Tags({ tags, hasLink = true }: Props) {
     <ul className={styles.tags}>
       {tags.map((tag) => (
         <li key={tag.id}>
-          <TagItem tag={tag} hasLink={hasLink} />
+          <TagListItem tag={tag} hasLink={hasLink} />
         </li>
       ))}
     </ul>

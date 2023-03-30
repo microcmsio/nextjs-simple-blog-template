@@ -1,7 +1,7 @@
 import { formatDate, formatRichText } from '@/libs/utils';
 import { type Article } from '@/libs/microcms';
 import styles from './index.module.css';
-import Tags from '../Tags';
+import TagList from '../TagList';
 
 type Props = {
   data: Article;
@@ -11,7 +11,7 @@ export default function Article({ data }: Props) {
   return (
     <main className={styles.main}>
       <h1 className={styles.title}>{data.title}</h1>
-      <Tags tags={data.tags} />
+      <TagList tags={data.tags} />
       <p className={styles.description}>{data.description}</p>
       <div className={styles.meta}>
         {data.writer && (
