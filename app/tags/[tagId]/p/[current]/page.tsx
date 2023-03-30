@@ -1,7 +1,7 @@
 import { getList } from '@/libs/microcms';
 import { LIMIT } from '@/constants';
 import Pagination from '@/components/Pagination';
-import ListItem from '@/components/ListItem';
+import ArticleList from '@/components/ArticleList';
 
 type Props = {
   params: {
@@ -19,13 +19,9 @@ export default async function Page({ params }: Props) {
     filters: `tags[contains]${tagId}`,
   });
   return (
-    <div>
-      <ul>
-        {data.contents.map((article) => (
-          <ListItem key={article.id} article={article} />
-        ))}
-      </ul>
+    <>
+      <ArticleList articles={data.contents} />
       <Pagination totalCount={data.totalCount} current={current} basePath={`/tags/${tagId}`} />
-    </div>
+    </>
   );
 }

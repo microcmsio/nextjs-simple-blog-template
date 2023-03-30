@@ -1,7 +1,7 @@
 import { getList } from '@/libs/microcms';
 import { LIMIT } from '@/constants';
 import Pagination from '@/components/Pagination';
-import ListItem from '@/components/ListItem';
+import ArticleList from '@/components/ArticleList';
 
 type Props = {
   params: {
@@ -16,13 +16,9 @@ export default async function Page({ params }: Props) {
     offset: LIMIT * (current - 1),
   });
   return (
-    <div>
-      <ul>
-        {data.contents.map((article) => (
-          <ListItem key={article.id} article={article} />
-        ))}
-      </ul>
+    <>
+      <ArticleList articles={data.contents} />
       <Pagination totalCount={data.totalCount} current={current} />
-    </div>
+    </>
   );
 }
