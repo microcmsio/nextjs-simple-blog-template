@@ -33,7 +33,7 @@ export default function Article({ data }: Props) {
           </div>
         )}
         <div>
-          <time>{formatDate(data.publishedAt || data.createdAt)}</time>
+          <time className={styles.time}>{formatDate(data.publishedAt || data.createdAt)}</time>
         </div>
       </div>
       <picture>
