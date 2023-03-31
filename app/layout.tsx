@@ -1,5 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { getTagList } from '@/libs/microcms';
+import { LIMIT } from '@/constants';
+import Nav from '@/components/Nav';
 import './globals.css';
 import styles from './layout.module.css';
 
@@ -8,7 +11,14 @@ export const metadata = {
   description: 'A simple blog presented by microCMS',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+type Props = {
+  children: React.ReactNode;
+};
+
+export default async function RootLayout({ children }: Props) {
+  const tags = await getTagList({
+    limit: LIMIT,
+  });
   return (
     <html lang="ja">
       <body>
@@ -24,6 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             />
           </Link>
         </header>
+        <Nav tags={tags.contents} />
         <main className={styles.main}>{children}</main>
         <footer className={styles.footer}>
           <p className={styles.cr}>© SIMPLE. All Rights Reserved 2023</p>

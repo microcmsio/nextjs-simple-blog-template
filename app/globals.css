@@ -7,8 +7,9 @@
   --color-bg-main: #fff;
   --color-bg-sub: #f3f3f3;
   --color-bg-code: #fafafa;
-  --color-border: #ccc;
-  --color-border-light: #ddd;
+  --color-border-dark: #ccc;
+  --color-border: #ddd;
+  --color-border-light: #f3f3f3;
   --color-current: #eee;
   --border-radius: 4px;
 }

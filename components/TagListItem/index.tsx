@@ -10,10 +10,10 @@ type Props = {
 export default function TagListItem({ tag, hasLink = true }: Props) {
   if (hasLink) {
     return (
-      <Link href={`/tags/${tag.id}`} className={styles.link}>
+      <Link href={`/tags/${tag.id}`} className={styles.tag}>
         #{tag.name}
       </Link>
     );
   }
-  return <span className={styles.link}>#{tag.name}</span>;
+  return <span className={styles.tag}>#{tag.name}</span>;
 }

@@ -1,0 +1,16 @@
+.search {
+  padding: 0 24px;
+  border: 1px solid var(--color-border-dark);
+  /* border-radius: var(--border-radius); */
+  border-radius: 20px;
+  width: 600px;
+  height: 40px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 640px) {
+  .search {
+    width: 100%;
+    margin: 0 24px;
+  }
+}
