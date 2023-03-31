@@ -19,7 +19,7 @@ export default async function Page({ searchParams }: Props) {
   return (
     <>
       <ArticleList articles={data.contents} />
-      <Pagination totalCount={data.totalCount} basePath="/search" />
+      <Pagination totalCount={data.totalCount} basePath="/search" q={searchParams.q} />
     </>
   );
 }
