@@ -8,6 +8,8 @@ type Props = {
   };
 };
 
+export const revalidate = 0;
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const data = await getDetail(params.slug);
 

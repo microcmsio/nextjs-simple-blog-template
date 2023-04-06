@@ -9,7 +9,6 @@ type Props = {
   };
 };
 
-// キャッシュ利用せず、SSR扱い
 export const revalidate = 0;
 
 export default async function Page({ searchParams }: Props) {
