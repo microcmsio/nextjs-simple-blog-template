@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import { Metadata } from 'next';
 import { getDetail } from '@/libs/microcms';
 import Article from '@/components/Article';
 
@@ -8,7 +8,7 @@ type Props = {
   };
 };
 
-export async function generateMetadata({ params }: Props, metadata: Metadata): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const data = await getDetail(params.slug);
 
   return {
@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props, metadata: Metadata): P
     openGraph: {
       title: data.title,
       description: data.description,
-      images: [data?.thumbnail?.url || metadata.metadataBase + '/og-image.png'],
+      images: [data?.thumbnail?.url || ''],
     },
   };
 }
