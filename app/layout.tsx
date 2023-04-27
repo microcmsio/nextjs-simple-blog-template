@@ -1,7 +1,7 @@
-import Image from 'next/image';
-import Link from 'next/link';
 import { getTagList } from '@/libs/microcms';
 import { LIMIT } from '@/constants';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import Nav from '@/components/Nav';
 import './globals.css';
 import styles from './layout.module.css';
@@ -33,23 +33,10 @@ export default async function RootLayout({ children }: Props) {
   return (
     <html lang="ja">
       <body>
-        <header className={styles.header}>
-          <Link href="/">
-            <Image
-              src="/logo.svg"
-              alt="SIMPLE"
-              className={styles.logo}
-              width={348}
-              height={133}
-              priority
-            />
-          </Link>
-        </header>
+        <Header />
         <Nav tags={tags.contents} />
         <main className={styles.main}>{children}</main>
-        <footer className={styles.footer}>
-          <p className={styles.cr}>© SIMPLE. All Rights Reserved 2023</p>
-        </footer>
+        <Footer />
       </body>
     </html>
   );
