@@ -17,6 +17,9 @@
     "jsxSingleQuote": false,
     "printWidth": 100
   },
+  "engines": {
+    "node": ">=18.x"
+  },
   "dependencies": {
     "@types/cheerio": "^0.22.31",
     "@types/node": "18.15.3",
