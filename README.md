@@ -2,7 +2,7 @@
 
 ![](public/img-cover.png)
 
-microCMS 公式のシンプルばブログのテンプレートです。
+microCMS 公式のシンプルなブログのテンプレートです。
 
 ## 動作環境
 
