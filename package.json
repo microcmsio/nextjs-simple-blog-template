@@ -33,7 +33,7 @@
     "eslint-config-next": "13.2.4",
     "eslint-config-prettier": "^8.7.0",
     "highlight.js": "^11.7.0",
-    "microcms-js-sdk": "^2.3.2",
+    "microcms-js-sdk": "^2.5.0",
     "next": "^13.4.4",
     "prettier": "^2.8.4",
     "react": "18.2.0",
