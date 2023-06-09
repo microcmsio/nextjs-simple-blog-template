@@ -13,7 +13,7 @@ export const metadata = {
   openGraph: {
     title: 'Simple Blog',
     description: 'A simple blog presented by microCMS',
-    images: '/og-image.png',
+    images: '/ogp.png',
   },
   alternates: {
     canonical: '/',
