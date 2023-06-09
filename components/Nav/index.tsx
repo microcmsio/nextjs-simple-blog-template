@@ -1,17 +1,16 @@
-import { Tag } from '@/libs/microcms';
-import TagList from '@/components/TagList';
+import { Suspense } from 'react';
 import SearchField from '@/components/SearchField';
 import styles from './index.module.css';
+import AllTagList from '../AllTagList';
 
-type Props = {
-  tags: Tag[];
-};
-
-export default function Nav({ tags }: Props) {
+export default function Nav() {
   return (
     <nav className={styles.nav}>
       <SearchField />
-      <TagList tags={tags} />
+      <Suspense>
+        {/* @ts-expect-error Server Component */}
+        <AllTagList />
+      </Suspense>
     </nav>
   );
 }
