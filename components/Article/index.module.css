@@ -143,10 +143,18 @@
   text-decoration: underline;
 }
 
-.content > figure > img {
+.content > figure {
+  margin: 2rem 0;
+}
+
+.content > figure img {
   max-width: 100%;
   height: auto;
-  margin: 2rem 0;
+}
+
+.content > figure figcaption {
+  font-size: 0.8rem;
+  color: var(--color-text-sub);
 }
 
 .content > strong {
