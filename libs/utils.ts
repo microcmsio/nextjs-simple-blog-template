@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
-import cheerio from 'cheerio';
+import { load } from 'cheerio';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/hybrid.css';
 
