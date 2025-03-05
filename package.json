@@ -21,7 +21,6 @@
     "node": ">=18.x"
   },
   "dependencies": {
-    "@date-fns/tz": "^1.2.0",
     "@types/cheerio": "^0.22.31",
     "@types/node": "^22.13.9",
     "@types/react": "^19.0.10",

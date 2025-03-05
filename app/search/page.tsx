@@ -3,14 +3,15 @@ import ArticleList from '@/components/ArticleList';
 import Pagination from '@/components/Pagination';
 
 type Props = {
-  searchParams: {
+  searchParams: Promise<{
     q?: string;
-  };
+  }>;
 };
 
 export const revalidate = 60;
 
-export default async function Page({ searchParams }: Props) {
+export default async function Page(props: Props) {
+  const searchParams = await props.searchParams;
   const data = await getList({
     q: searchParams.q,
   });

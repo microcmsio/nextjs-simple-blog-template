@@ -1,4 +1,4 @@
-import { formatInTimeZone } from 'date-fns/tz';
+import { formatInTimeZone } from 'date-fns-tz';
 import { load } from 'cheerio';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/hybrid.css';

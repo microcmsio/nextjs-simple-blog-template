@@ -4,14 +4,15 @@ import Pagination from '@/components/Pagination';
 import ArticleList from '@/components/ArticleList';
 
 type Props = {
-  params: {
+  params: Promise<{
     tagId: string;
-  };
+  }>;
 };
 
 export const revalidate = 60;
 
-export default async function Page({ params }: Props) {
+export default async function Page(props: Props) {
+  const params = await props.params;
   const { tagId } = params;
   const data = await getList({
     limit: LIMIT,
