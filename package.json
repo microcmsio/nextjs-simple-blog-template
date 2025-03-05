@@ -21,23 +21,23 @@
     "node": ">=18.x"
   },
   "dependencies": {
+    "@date-fns/tz": "^1.2.0",
     "@types/cheerio": "^0.22.31",
-    "@types/node": "18.15.3",
-    "@types/react": "18.0.28",
-    "@types/react-dom": "18.0.11",
+    "@types/node": "^22.13.9",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
     "cheerio": "^1.0.0-rc.12",
-    "date-fns": "^2.29.3",
-    "date-fns-tz": "^2.0.0",
+    "date-fns-tz": "^3.2.0",
     "encoding": "^0.1.13",
-    "eslint": "8.36.0",
-    "eslint-config-next": "13.2.4",
-    "eslint-config-prettier": "^8.7.0",
+    "eslint": "^9.21.0",
+    "eslint-config-next": "^15.2.1",
+    "eslint-config-prettier": "^10.0.2",
     "highlight.js": "^11.7.0",
-    "microcms-js-sdk": "^2.3.2",
-    "next": "^13.4.4",
-    "prettier": "^2.8.4",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "typescript": "4.9.5"
+    "microcms-js-sdk": "^3.1.2",
+    "next": "^15.2.1",
+    "prettier": "^3.5.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "typescript": "^5.8.2"
   }
 }
