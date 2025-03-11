@@ -8,8 +8,6 @@ type Props = {
   }>;
 };
 
-export const revalidate = 60;
-
 export default async function Page(props: Props) {
   const searchParams = await props.searchParams;
   const data = await getList({

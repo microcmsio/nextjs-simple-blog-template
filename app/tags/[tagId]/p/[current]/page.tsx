@@ -10,8 +10,6 @@ type Props = {
   }>;
 };
 
-export const revalidate = 60;
-
 export default async function Page(props: Props) {
   const params = await props.params;
   const { tagId } = params;
