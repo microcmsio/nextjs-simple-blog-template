@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { getList } from '@/libs/microcms';
 import { LIMIT } from '@/constants';
 import Pagination from '@/components/Pagination';
@@ -8,6 +9,15 @@ type Props = {
     current: string;
   }>;
 };
+
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params;
+  return {
+    alternates: {
+      canonical: `/p/${params.current}`,
+    },
+  };
+}
 
 export default async function Page(props: Props) {
   const params = await props.params;

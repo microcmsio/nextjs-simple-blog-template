@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { metadata as layoutMetadata } from '@/app/layout';
 import { getDetail } from '@/libs/microcms';
 import Article from '@/components/Article';
 
@@ -19,12 +20,15 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   });
 
   return {
-    title: data.title,
+    title: data.title + ' | ' + layoutMetadata.title,
     description: data.description,
     openGraph: {
-      title: data.title,
+      title: data.title + ' | ' + layoutMetadata.title,
       description: data.description,
       images: [data?.thumbnail?.url || ''],
+    },
+    alternates: {
+      canonical: `/articles/${params.slug}`,
     },
   };
 }

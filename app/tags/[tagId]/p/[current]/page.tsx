@@ -1,4 +1,6 @@
-import { getList } from '@/libs/microcms';
+import { Metadata } from 'next';
+import { metadata as layoutMetadata } from '@/app/layout';
+import { getList, getTag } from '@/libs/microcms';
 import { LIMIT } from '@/constants';
 import Pagination from '@/components/Pagination';
 import ArticleList from '@/components/ArticleList';
@@ -7,8 +9,24 @@ type Props = {
   params: Promise<{
     tagId: string;
     current: string;
+    name: string;
   }>;
 };
+
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params;
+  const { tagId } = params;
+  const tag = await getTag(tagId);
+  return {
+    title: tag.name + ' | ' + layoutMetadata.title,
+    openGraph: {
+      title: tag.name + ' | ' + layoutMetadata.title,
+    },
+    alternates: {
+      canonical: `/tags/${params.tagId}/p/${params.current}`,
+    },
+  };
+}
 
 export default async function Page(props: Props) {
   const params = await props.params;
