@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import { metadata as layoutMetadata } from '@/app/layout';
 import { getList, getTag } from '@/libs/microcms';
 import { LIMIT } from '@/constants';
 import Pagination from '@/components/Pagination';
@@ -18,9 +17,9 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const { tagId } = params;
   const tag = await getTag(tagId);
   return {
-    title: tag.name + ' | ' + layoutMetadata.title,
+    title: tag.name,
     openGraph: {
-      title: tag.name + ' | ' + layoutMetadata.title,
+      title: tag.name,
     },
     alternates: {
       canonical: `/tags/${params.tagId}/p/${params.current}`,

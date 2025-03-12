@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import { metadata as layoutMetadata } from '@/app/layout';
 import { getList } from '@/libs/microcms';
 import { LIMIT } from '@/constants';
 import Pagination from '@/components/Pagination';
@@ -18,9 +17,9 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const searchParams = await props.searchParams;
   const params = await props.params;
   return {
-    title: '「' + searchParams.q + '」の検索結果 | ' + layoutMetadata.title,
+    title: '「' + searchParams.q + '」の検索結果',
     openGraph: {
-      title: '「' + searchParams.q + '」の検索結果 | ' + layoutMetadata.title,
+      title: '「' + searchParams.q + '」の検索結果',
     },
     alternates: {
       canonical: `/search/p/${params.current}?q=${searchParams.q}`,
