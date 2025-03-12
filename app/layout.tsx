@@ -14,7 +14,10 @@ export const metadata = {
   },
   description: 'A simple blog presented by microCMS',
   openGraph: {
-    title: 'Simple Blog',
+    title: {
+      template: '%s | Simple Blog',
+      default: 'Simple Blog',
+    },
     description: 'A simple blog presented by microCMS',
     images: '/ogp.png',
   },
