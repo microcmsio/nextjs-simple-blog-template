@@ -1,17 +1,33 @@
+import { Metadata } from 'next';
 import { getList, getTag } from '@/libs/microcms';
 import { LIMIT } from '@/constants';
 import Pagination from '@/components/Pagination';
 import ArticleList from '@/components/ArticleList';
 
 type Props = {
-  params: {
+  params: Promise<{
     tagId: string;
-  };
+    name: string;
+  }>;
 };
 
-export const revalidate = 60;
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params;
+  const { tagId } = params;
+  const tag = await getTag(tagId);
+  return {
+    title: tag.name,
+    openGraph: {
+      title: tag.name,
+    },
+    alternates: {
+      canonical: `/tags/${params.tagId}`,
+    },
+  };
+}
 
-export default async function Page({ params }: Props) {
+export default async function Page(props: Props) {
+  const params = await props.params;
   const { tagId } = params;
   const data = await getList({
     limit: LIMIT,

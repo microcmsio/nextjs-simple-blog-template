@@ -1,16 +1,29 @@
+import { Metadata } from 'next';
 import { getList } from '@/libs/microcms';
 import ArticleList from '@/components/ArticleList';
 import Pagination from '@/components/Pagination';
 
 type Props = {
-  searchParams: {
+  searchParams: Promise<{
     q?: string;
-  };
+  }>;
 };
 
-export const revalidate = 60;
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const searchParams = await props.searchParams;
+  return {
+    title: '「' + searchParams.q + '」の検索結果',
+    openGraph: {
+      title: '「' + searchParams.q + '」の検索結果',
+    },
+    alternates: {
+      canonical: `/search?q=${searchParams.q}`,
+    },
+  };
+}
 
-export default async function Page({ searchParams }: Props) {
+export default async function Page(props: Props) {
+  const searchParams = await props.searchParams;
   const data = await getList({
     q: searchParams.q,
   });
