@@ -8,7 +8,7 @@ export const formatDate = (date: string) => {
 };
 
 export const formatRichText = (richText: string) => {
-  const $ = load(richText);
+  const $ = load(richText, null, false);
   const highlight = (text: string, lang?: string) => {
     if (!lang) return hljs.highlightAuto(text);
     try {
