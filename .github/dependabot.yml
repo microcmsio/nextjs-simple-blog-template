@@ -4,4 +4,5 @@ updates:
     directory: "/" # Location of your package manifests
     schedule:
       interval: "daily" # or "weekly", "monthly"
-      time: "11:30"
+      time: "03:00" # 12:00 JST (UTC+9)
+      timezone: "Asia/Tokyo"
