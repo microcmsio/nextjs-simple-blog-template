@@ -88,7 +88,7 @@ jobs:
           #   'Please provide a thorough code review focusing on our coding standards and best practices.' }}
           
           # Optional: Add specific tools for running tests or linting
-          allowed_tools: "Bash(npm run test),Bash(npm run lint),Bash(npm run typecheck),mcp__playwright__browser_navigate"
+          allowed_tools: "Bash(npm run test),Bash(npm run lint),Bash(npm run typecheck),mcp__playwright__browser_navigate,mcp__playwright__browser_take_screenshot,mcp__playwright__browser_snapshot,mcp__playwright__browser_click,mcp__playwright__browser_type"
           
           # Optional: Skip review for certain conditions
           # if: |
