@@ -44,6 +44,9 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Start dev server
+        env:
+          MICROCMS_SERVICE_DOMAIN: ${{ secrets.MICROCMS_SERVICE_DOMAIN }}
+          MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
         run: |
           npm run dev &
           sleep 10
