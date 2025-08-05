@@ -42,14 +42,12 @@ jobs:
           
           # Direct prompt for automated review (no @claude mention needed)
           direct_prompt: |
-            Please review this pull request and provide feedback on:
-            - Code quality and best practices
-            - Potential bugs or issues
-            - Performance considerations
-            - Security concerns
-            - Test coverage
+            重大なバグや脆弱性がないか確認し、簡潔にフィードバックして。
+            応答はすべて日本語で行うこと。
+
+            動作確認ではPlaywright MCPを使い、localhost:3000にアクセスして要素を確認、その内容をレポートしてください。
             
-            Be constructive and helpful in your feedback.
+
 
           # Optional: Use sticky comments to make Claude reuse the same comment on subsequent pushes to the same PR
           # use_sticky_comment: true
@@ -69,7 +67,7 @@ jobs:
           #   'Please provide a thorough code review focusing on our coding standards and best practices.' }}
           
           # Optional: Add specific tools for running tests or linting
-          # allowed_tools: "Bash(npm run test),Bash(npm run lint),Bash(npm run typecheck)"
+          allowed_tools: "Bash(npm run test),Bash(npm run lint),Bash(npm run typecheck),mcp__playwright__playwright_browser_navigate"
           
           # Optional: Skip review for certain conditions
           # if: |

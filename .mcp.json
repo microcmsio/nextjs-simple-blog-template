@@ -4,7 +4,10 @@
             "type": "stdio",
             "command": "npx",
             "args": [
-                "@playwright/mcp@latest"
+                "@playwright/mcp@latest",
+                "--executable-path",
+                "/Users/him/Library/Caches/ms-playwright/chromium-1181/chrome-mac/Chromium.app/Contents/MacOS/Chromium",
+                "--isolated"
             ],
             "env": {}
         }
