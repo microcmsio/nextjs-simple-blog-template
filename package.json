@@ -10,7 +10,9 @@
     "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json,css}'",
     "test": "playwright test",
     "test:ui": "playwright test --ui",
-    "test:headed": "playwright test --headed"
+    "test:headed": "playwright test --headed",
+    "upload:microcms": "node -r dotenv/config scripts/upload-to-microcms.js",
+    "upload:test": "PLAYWRIGHT_SCREENSHOTS_PATH=./tmp node -r dotenv/config scripts/upload-to-microcms.js"
   },
   "prettier": {
     "trailingComma": "all",
@@ -29,6 +31,7 @@
     "@types/react-dom": "^19.0.4",
     "cheerio": "^1.0.0-rc.12",
     "date-fns-tz": "^3.2.0",
+    "dotenv": "^17.2.1",
     "encoding": "^0.1.13",
     "eslint": "^9.23.0",
     "eslint-config-next": "^15.4.0",
