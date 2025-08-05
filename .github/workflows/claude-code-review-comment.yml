@@ -1,0 +1,122 @@
+name: Claude Code Review Comment
+
+on:
+  workflow_run:
+    workflows: ["Claude Code Review"]
+    types:
+      - completed
+
+jobs:
+  comment-screenshots:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.event == 'pull_request' }}
+    permissions:
+      contents: read
+      pull-requests: write
+      actions: read
+      
+    steps:
+      - name: Get PR number
+        id: pr
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: ${{ github.event.workflow_run.id }}
+            });
+            
+            // PRナンバーをアーティファクト名から抽出
+            const screenshotArtifact = artifacts.data.artifacts.find(artifact => 
+              artifact.name.startsWith('playwright-screenshots-')
+            );
+            
+            if (screenshotArtifact) {
+              const prNumber = screenshotArtifact.name.split('-').pop();
+              core.setOutput('number', prNumber);
+              core.setOutput('artifact_id', screenshotArtifact.id);
+              core.setOutput('artifact_name', screenshotArtifact.name);
+              return prNumber;
+            }
+            return null;
+
+      - name: Download artifacts
+        if: steps.pr.outputs.number
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ steps.pr.outputs.artifact_name }}
+          path: ./screenshots
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate comment body
+        if: steps.pr.outputs.number
+        id: comment
+        run: |
+          echo "## 📸 スクリーンショット" > comment.md
+          echo "" >> comment.md
+          
+          if [ -d "./screenshots" ] && [ "$(ls -A ./screenshots)" ]; then
+            echo "Claude Codeによる動作確認で撮影されたスクリーンショットです：" >> comment.md
+            echo "" >> comment.md
+            
+            # アーティファクトのダウンロードURLを生成
+            echo "### 📥 ダウンロード" >> comment.md
+            echo "[スクリーンショットをダウンロード](https://github.com/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }})" >> comment.md
+            echo "" >> comment.md
+            
+            # ファイル一覧を表示
+            echo "### 📂 ファイル一覧" >> comment.md
+            echo "" >> comment.md
+            for file in ./screenshots/*; do
+              if [ -f "$file" ]; then
+                filename=$(basename "$file")
+                echo "- $filename" >> comment.md
+              fi
+            done
+          else
+            echo "スクリーンショットが見つかりませんでした。" >> comment.md
+          fi
+          
+          echo "" >> comment.md
+          echo "---" >> comment.md
+          echo "_このコメントは自動生成されました by Claude Code Review workflow_" >> comment.md
+
+      - name: Comment on PR
+        if: steps.pr.outputs.number
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const comment = fs.readFileSync('comment.md', 'utf8');
+            
+            // 既存のコメントを検索
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: ${{ steps.pr.outputs.number }}
+            });
+            
+            const botComment = comments.find(comment => 
+              comment.user.type === 'Bot' && 
+              comment.body.includes('📸 スクリーンショット')
+            );
+            
+            if (botComment) {
+              // 既存のコメントを更新
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: comment
+              });
+            } else {
+              // 新しいコメントを作成
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: ${{ steps.pr.outputs.number }},
+                body: comment
+              });
+            }

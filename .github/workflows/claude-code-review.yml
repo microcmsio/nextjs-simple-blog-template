@@ -55,6 +55,8 @@ jobs:
       - name: Run Claude Code Review
         id: claude-review
         uses: anthropics/claude-code-action@beta
+        env:
+          PLAYWRIGHT_SCREENSHOTS_PATH: ./playwright-screenshots
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
 
@@ -65,6 +67,9 @@ jobs:
           direct_prompt: |
             動作確認をして、変更後にWebサイトが壊れてないかをチェックします。
             動作確認ではPlaywright MCPを使い、localhost:3000にアクセスして要素を確認し、その内容をレポートしてください。
+            
+            スクリーンショットを撮影する際は、環境変数PLAYWRIGHT_SCREENSHOTS_PATHで指定されたディレクトリ（./playwright-screenshots）に保存してください。
+            例: mcp__playwright__browser_take_screenshot を使用する際、filename パラメータに ./playwright-screenshots/page-screenshot.png のように指定してください。
 
             応答はすべて日本語で行うこと。
             
@@ -88,10 +93,19 @@ jobs:
           #   'Please provide a thorough code review focusing on our coding standards and best practices.' }}
           
           # Optional: Add specific tools for running tests or linting
-          allowed_tools: "Bash(npm run test),Bash(npm run lint),Bash(npm run typecheck),mcp__playwright__browser_navigate,mcp__playwright__browser_take_screenshot,mcp__playwright__browser_snapshot,mcp__playwright__browser_click,mcp__playwright__browser_type"
+          allowed_tools: "Bash(npm run test),Bash(npm run lint),Bash(npm run typecheck),mcp__playwright__browser_navigate,mcp__playwright__browser_take_screenshot,mcp__playwright__browser_snapshot,mcp__playwright__browser_click,mcp__playwright__browser_type,mcp__playwright__browser_navigate_back"
           
           # Optional: Skip review for certain conditions
           # if: |
           #   !contains(github.event.pull_request.title, '[skip-review]') &&
           #   !contains(github.event.pull_request.title, '[WIP]')
+
+      - name: Upload screenshots as artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-screenshots-${{ github.event.pull_request.number }}
+          path: ./playwright-screenshots/
+          retention-days: 7
+          if-no-files-found: ignore
 
