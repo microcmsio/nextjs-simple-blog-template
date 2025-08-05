@@ -68,8 +68,8 @@ jobs:
             動作確認をして、変更後にWebサイトが壊れてないかをチェックします。
             動作確認ではPlaywright MCPを使い、localhost:3000にアクセスして要素を確認し、その内容をレポートしてください。
             
-            スクリーンショットを撮影する際は、環境変数PLAYWRIGHT_SCREENSHOTS_PATHで指定されたディレクトリ（./playwright-screenshots）に保存してください。
-            例: mcp__playwright__browser_take_screenshot を使用する際、filename パラメータに ./playwright-screenshots/page-screenshot.png のように指定してください。
+            スクリーンショットを撮影する際は、環境変数PLAYWRIGHT_SCREENSHOTS_PATHで指定されたディレクトリに保存してください。
+            例: mcp__playwright__browser_take_screenshot を使用する際、filename パラメータに ${PLAYWRIGHT_SCREENSHOTS_PATH}/page-screenshot.png のように環境変数を使用して指定してください。
 
             応答はすべて日本語で行うこと。
             
@@ -105,7 +105,9 @@ jobs:
         if: always()
         with:
           name: playwright-screenshots-${{ github.event.pull_request.number }}
-          path: ./playwright-screenshots/
+          path: |
+            ./playwright-screenshots/
+            /tmp/playwright-mcp-output/
           retention-days: 7
           if-no-files-found: ignore
 
