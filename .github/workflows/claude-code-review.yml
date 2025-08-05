@@ -31,6 +31,18 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright
+        run: npx playwright install --with-deps chromium
+
       - name: Run Claude Code Review
         id: claude-review
         uses: anthropics/claude-code-action@beta
@@ -67,7 +79,7 @@ jobs:
           #   'Please provide a thorough code review focusing on our coding standards and best practices.' }}
           
           # Optional: Add specific tools for running tests or linting
-          allowed_tools: "Bash(npm run test),Bash(npm run lint),Bash(npm run typecheck),mcp__playwright__playwright_browser_navigate"
+          allowed_tools: "Bash(npm run test),Bash(npm run lint),Bash(npm run typecheck),mcp__playwright__browser_navigate"
           
           # Optional: Skip review for certain conditions
           # if: |
