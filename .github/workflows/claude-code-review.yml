@@ -31,9 +31,32 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright
+        run: npx playwright install --with-deps chromium
+
+      - name: Start dev server
+        env:
+          MICROCMS_SERVICE_DOMAIN: ${{ secrets.MICROCMS_SERVICE_DOMAIN }}
+          MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
+        run: |
+          npm run dev &
+          sleep 10
+          curl --retry 10 --retry-delay 2 --retry-connrefused http://localhost:3000
+
       - name: Run Claude Code Review
         id: claude-review
         uses: anthropics/claude-code-action@beta
+        env:
+          PLAYWRIGHT_SCREENSHOTS_PATH: ./playwright-screenshots
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
 
@@ -42,14 +65,15 @@ jobs:
           
           # Direct prompt for automated review (no @claude mention needed)
           direct_prompt: |
-            Please review this pull request and provide feedback on:
-            - Code quality and best practices
-            - Potential bugs or issues
-            - Performance considerations
-            - Security concerns
-            - Test coverage
+            動作確認をして、変更後にWebサイトが壊れてないかをチェックします。
+            動作確認ではPlaywright MCPを使い、localhost:3000にアクセスして要素を確認し、その内容をレポートしてください。
             
-            Be constructive and helpful in your feedback.
+            スクリーンショットを撮影する際は、環境変数PLAYWRIGHT_SCREENSHOTS_PATHで指定されたディレクトリに保存してください。
+            例: mcp__playwright__browser_take_screenshot を使用する際、filename パラメータに ${PLAYWRIGHT_SCREENSHOTS_PATH}/page-screenshot.png のように環境変数を使用して指定してください。
+
+            応答はすべて日本語で行うこと。
+            
+
 
           # Optional: Use sticky comments to make Claude reuse the same comment on subsequent pushes to the same PR
           # use_sticky_comment: true
@@ -69,10 +93,21 @@ jobs:
           #   'Please provide a thorough code review focusing on our coding standards and best practices.' }}
           
           # Optional: Add specific tools for running tests or linting
-          # allowed_tools: "Bash(npm run test),Bash(npm run lint),Bash(npm run typecheck)"
+          allowed_tools: "Bash(npm run test),Bash(npm run lint),Bash(npm run typecheck),mcp__playwright__browser_navigate,mcp__playwright__browser_take_screenshot,mcp__playwright__browser_snapshot,mcp__playwright__browser_click,mcp__playwright__browser_type,mcp__playwright__browser_navigate_back"
           
           # Optional: Skip review for certain conditions
           # if: |
           #   !contains(github.event.pull_request.title, '[skip-review]') &&
           #   !contains(github.event.pull_request.title, '[WIP]')
+
+      - name: Upload screenshots as artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-screenshots-${{ github.event.pull_request.number }}
+          path: |
+            ./playwright-screenshots/
+            /tmp/playwright-mcp-output/
+          retention-days: 7
+          if-no-files-found: ignore
 
