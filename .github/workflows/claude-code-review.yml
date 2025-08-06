@@ -70,7 +70,8 @@ jobs:
           
           # Direct prompt for automated review (no @claude mention needed)
           direct_prompt: |
-            動作確認をして、変更後にWebサイトが壊れてないかをチェックします。
+            このPRについて、「不具合や脆弱性がないか」「動作が壊れてないか」をチェックしてください。
+
             動作確認ではPlaywright MCPを使い、localhost:3000にアクセスして要素を確認し、その内容を簡潔にレポートしてください。
             
             スクリーンショットを撮影する際は、以下の手順に従ってください：
@@ -83,7 +84,7 @@ jobs:
             
             開発環境はすでに起動しているので、npm install や npm run dev は不要です。
 
-            応答はすべて日本語で行うこと。
+            応答はすべて日本語で行ってください。
 
           # Optional: Use sticky comments to make Claude reuse the same comment on subsequent pushes to the same PR
           # use_sticky_comment: true
