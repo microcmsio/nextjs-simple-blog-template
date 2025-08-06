@@ -31,9 +31,37 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright
+        run: npx playwright install --with-deps chromium
+
+      - name: Start dev server
+        env:
+          MICROCMS_SERVICE_DOMAIN: ${{ secrets.MICROCMS_SERVICE_DOMAIN }}
+          MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
+        run: |
+          npm run dev &
+          sleep 10
+          curl --retry 10 --retry-delay 2 --retry-connrefused http://localhost:3000
+
       - name: Run Claude Code Review
         id: claude-review
         uses: anthropics/claude-code-action@beta
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET_NAME: ${{ secrets.R2_BUCKET_NAME }}
+          R2_PUBLIC_DOMAIN: ${{ secrets.R2_PUBLIC_DOMAIN }}
+          SCREENSHOTS_PATH: /tmp/playwright-mcp-output
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
 
@@ -42,14 +70,20 @@ jobs:
           
           # Direct prompt for automated review (no @claude mention needed)
           direct_prompt: |
-            Please review this pull request and provide feedback on:
-            - Code quality and best practices
-            - Potential bugs or issues
-            - Performance considerations
-            - Security concerns
-            - Test coverage
+            動作確認をして、変更後にWebサイトが壊れてないかをチェックします。
+            動作確認ではPlaywright MCPを使い、localhost:3000にアクセスして要素を確認し、その内容を簡潔にレポートしてください。
             
-            Be constructive and helpful in your feedback.
+            スクリーンショットを撮影する際は、以下の手順に従ってください：
+            1. まず mcp__playwright__browser_resize を使用してブラウザサイズを幅840px、高さ600pxに設定してください
+            2. その後、スクリーンショットを撮影し、ディレクトリに保存してください
+            3. 保存したスクリーンショットをCloudflare R2にアップロードしてください
+              * アップロードは `node scripts/upload-to-r2.js` のようにできます
+              * アップロードしたURLは `<img src="${url}" alt="${fileName}" width="480">` のようにレポートに含めてください
+              * 動作確認の関連する箇所にスクリーンショットを貼ると分かりやすいです
+            
+            開発環境はすでに起動しているので、npm install や npm run dev は不要です。
+
+            応答はすべて日本語で行うこと。
 
           # Optional: Use sticky comments to make Claude reuse the same comment on subsequent pushes to the same PR
           # use_sticky_comment: true
@@ -69,7 +103,9 @@ jobs:
           #   'Please provide a thorough code review focusing on our coding standards and best practices.' }}
           
           # Optional: Add specific tools for running tests or linting
-          # allowed_tools: "Bash(npm run test),Bash(npm run lint),Bash(npm run typecheck)"
+          allowed_tools: "Bash(npm run test),Bash(npm run lint),Bash(npm run typecheck),Bash(node scripts/upload-to-r2.js),mcp__playwright__browser_navigate,mcp__playwright__browser_resize,mcp__playwright__browser_take_screenshot,mcp__playwright__browser_snapshot,mcp__playwright__browser_click,mcp__playwright__browser_type,mcp__playwright__browser_navigate_back"
+
+          timeout_minutes: 5
           
           # Optional: Skip review for certain conditions
           # if: |
