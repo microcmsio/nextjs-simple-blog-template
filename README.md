@@ -31,6 +31,15 @@ microCMS 管理画面の URL（https://xxxxxxxx.microcms.io）の xxxxxxxx の�
 開発環境 → http://localhost:3000  
 本番環境 → https://xxxxxxxx.vercel.app/ など
 
+### GitHub Actionsへの環境変数の設定
+
+このリポジトリではPlaywrightによるE2Eテストが実装されています。
+GitHubに変更をプッシュする、あるいはPull Requestを作成すると自動でテストが実行されます。
+
+利用するにはGitHub Actionsのシークレットへの設定が必要です。
+[こちらの手順](https://docs.github.com/ja/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets)に従って、`MICROCMS_API_KEY`と`MICROCMS_SERVICE_DOMAIN`をシークレットに設定してください。
+
+
 ## 開発の仕方
 
 1. パッケージのインストール
