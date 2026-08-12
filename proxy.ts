@@ -5,7 +5,7 @@ const cachePolicies = {
   publicIsr: 'public, s-maxage=60, stale-while-revalidate=300',
 };
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;
   const cachePolicy = searchParams.has('dk') ? cachePolicies.noCache : cachePolicies.publicIsr;
 
