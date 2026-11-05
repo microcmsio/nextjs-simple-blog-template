@@ -20,6 +20,18 @@
     "jsxSingleQuote": false,
     "printWidth": 100
   },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": ">=24.x",
+      "onFail": "error"
+    },
+    "packageManager": {
+      "name": "npm",
+      "version": "12.2.1",
+      "onFail": "error"
+    }
+  },
   "engines": {
     "npm": "12.2.1",
     "node": ">=24.x"
