@@ -1,4 +1,5 @@
 {
+  "packageManager": "npm@12.2.1",
   "name": "nextjs-simple-blog-template",
   "version": "0.1.0",
   "private": true,
@@ -20,6 +21,7 @@
     "printWidth": 100
   },
   "engines": {
+    "npm": "12.2.1",
     "node": ">=24.x"
   },
   "dependencies": {
@@ -42,5 +44,8 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.62.1"
+  },
+  "allowScripts": {
+    "unrs-resolver@1.12.2": true
   }
 }
