@@ -15,9 +15,17 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: 24
-        cache: 'npm'
     - name: Setup npm 12
       run: npm install -g npm@12.2.1 --engine-strict=false
+    - name: Get npm cache directory
+      id: npm-cache
+      run: echo "dir=$(npm config get cache)" >> "$GITHUB_OUTPUT"
+    - uses: actions/cache@v4
+      with:
+        path: ${{ steps.npm-cache.outputs.dir }}
+        key: npm-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+        restore-keys: |
+          npm-${{ runner.os }}-
     - name: Install dependencies
       run: npm ci
     - name: Install Playwright Browsers
