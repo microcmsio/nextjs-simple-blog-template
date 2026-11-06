@@ -20,7 +20,7 @@
     "printWidth": 100
   },
   "engines": {
-    "node": ">=24.x"
+    "node": "26.x"
   },
   "dependencies": {
     "@types/node": "^24.13.3",
