@@ -30,6 +30,17 @@ jobs:
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
+    - name: Check microCMS API
+      env:
+        MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
+        MICROCMS_SERVICE_DOMAIN: ${{ secrets.MICROCMS_SERVICE_DOMAIN }}
+      run: |
+        for endpoint in blog tags; do
+          code=$(curl -s -o /tmp/mcms-body -w "%{http_code}" \
+            -H "X-MICROCMS-API-KEY: ${MICROCMS_API_KEY}" \
+            "https://${MICROCMS_SERVICE_DOMAIN}.microcms.io/api/v1/${endpoint}?limit=1")
+          echo "${endpoint}: ${code}"
+        done
     - name: Run Playwright tests
       run: npm run test:e2e
       env:
