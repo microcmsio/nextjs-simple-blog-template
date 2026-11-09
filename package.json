@@ -20,7 +20,7 @@
     "printWidth": 100
   },
   "engines": {
-    "node": ">=24.x"
+    "node": "26.x"
   },
   "dependencies": {
     "@types/node": "^24.13.3",
@@ -42,5 +42,8 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.62.1"
+  },
+  "allowScripts": {
+    "unrs-resolver@1.12.2": true
   }
 }
